@@ -7,11 +7,9 @@ const HabitSchema = new mongoose.Schema({
   },
   completed: {
     type: Number,
-    default: 0,
   },
   streak: {
     type: Number,
-    default: 0,
   },
   creation_date: {
     type: Number,
