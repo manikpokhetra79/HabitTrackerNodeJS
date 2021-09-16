@@ -5,7 +5,7 @@ const HabitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  habitsCompleted: {
+  completed: {
     type: Number,
     default: 0,
   },
