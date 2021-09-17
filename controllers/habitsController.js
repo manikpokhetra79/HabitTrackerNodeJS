@@ -1,17 +1,17 @@
 const Habit = require('../models/habitModel');
 const Month = [
-  'January',
-  'February',
-  'March',
-  'April',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
   'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 //controller for habitspage
 module.exports.habitsPage = (req, res) => {
@@ -44,6 +44,7 @@ module.exports.create = (req, res) => {
     }
   );
 };
+
 //action for deleting habit
 module.exports.delete = (req, res) => {
   let id = req.params.id;
@@ -59,6 +60,17 @@ module.exports.delete = (req, res) => {
 
 //checking update status
 module.exports.weeklyview = (req, res) => {
+  //send date array
+  let date = new Date();
+  let days = [];
+  for (let i = 0; i < 7; i++) {
+    let d =
+      date.getDate() + ',' + Month[date.getMonth()] + ' ' + date.getFullYear();
+    date.setDate(date.getDate() - 1); //decrease date one by one
+    days.push(d);
+  }
+  //reverse array for desired
+  days.reverse();
   Habit.find({}, function (error, habits) {
     updateData(habits);
     if (error) {
@@ -68,7 +80,7 @@ module.exports.weeklyview = (req, res) => {
     return res.render('weeklyview', {
       title: 'Habits Weekly View',
       habits: habits,
-      Month: Month,
+      days,
     });
   });
 };
@@ -110,6 +122,13 @@ let updateData = (habits) => {
       habit.creation_date = todaysDate;
       updateStreakandCompleted(habit);
       habit.save();
+    } else if (diff > 7) {
+      for (let i = 0; i < 7; i++) {
+        habit.days[i] = 'None';
+        habit.creation_date = todaysDate;
+        updateStreakandCompleted(habit);
+        habit.save();
+      }
     }
   }
 };
@@ -127,17 +146,20 @@ let updateStreakandCompleted = async (habit) => {
         if (curr_streak > maxStreak) {
           maxStreak = curr_streak;
           curr_streak = 0;
+        } else {
+          streak = 0;
         }
       }
     }
-    if (curr_streak >= maxStreak) {
+
+    if (curr_streak > maxStreak) {
       maxStreak = curr_streak;
     }
     await Habit.findByIdAndUpdate(habit.id, {
       streak: maxStreak,
       completed: curr_completed,
     });
-    console.log('updated');
+    // console.log('updated');
   } catch (error) {
     if (error) {
       console.log(error);

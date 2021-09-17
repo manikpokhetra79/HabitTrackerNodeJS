@@ -6,6 +6,8 @@ const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 
 app.use(express.urlencoded());
+//serve static files
+app.use(express.static('assets'));
 //set up view engine
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
