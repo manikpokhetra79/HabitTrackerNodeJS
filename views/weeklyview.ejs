@@ -1,8 +1,9 @@
 <header><%- include("navbar.ejs")%></header>
-<div>
-<table class="table table-striped table-hover table-bordered "> 
+<section style="height:85vh; background-color: aliceblue;"> 
+<div class="">
+<table class="table habit-list table-hover table-striped table-success table-bordered"> 
     <thead class="table-dark">
-        <tr class="m-4">
+        <tr class="p-4">
             <th>Habit Name</th>
             <% for(let d of days){%>
             <th><%=d%></th>
@@ -39,3 +40,4 @@
 </tbody>
     </table>
 </div>
+</section>
