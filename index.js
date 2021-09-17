@@ -1,5 +1,6 @@
 const express = require('express');
 const port = process.env.PORT;
+const cors = require('cors');
 const app = express();
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
@@ -12,7 +13,8 @@ app.use(express.static('assets'));
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 app.set('views', './views');
-
+//use cors module
+app.use(cors());
 app.use('/', require('./routes'));
 //listen to server
 app.listen(port, (err) => {
