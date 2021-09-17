@@ -1,9 +1,4 @@
 body {
   font-family: 'Roboto Mono', monospace;
-}
-table.habit-list {
-  table-layout: fixed;
-}
-.pst-2 {
-  padding-top: 2rem!important;
+  background-color: #dfe3ee;
 }

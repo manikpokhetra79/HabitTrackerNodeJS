@@ -1,7 +1,7 @@
 <header><%- include("navbar.ejs")%></header>
 
 <div class="container">
-  <div class="row mt-2  text-primary">
+  <div class="row mt-2 text-primary">
     <h2>Add Habits here</h2>
   </div>
   <div class="row mt-3 mb-3">
@@ -12,7 +12,12 @@
         name="habit"
         placeholder="Enter habit"
       />
-      <input class="btn btn-primary btn-lg btn-block" style="width:100%"type="submit" value="Create Habit" />
+      <input
+        class="btn btn-primary btn-lg btn-block"
+        style="width: 100%"
+        type="submit"
+        value="Create Habit"
+      />
     </form>
   </div>
 </div>
@@ -30,19 +35,19 @@
           m-3
         "
       >
-        <div class="ms-2 me-auto">
-          <div class="fw-bold fs-5"><%=habit.description%></div>
+        <div class="me-auto">
+          <div class="fw-bold"><%=habit.description%></div>
 
           <a href="/habit/delete/<%=habit.id%>"
-            ><button class="btn btn-danger">Remove Habit</button></a
+            ><button class="btn btn-danger btn-sm m-3">Remove Habit</button></a
+          ><span class="badge bg-success rounded-pill"
+            >Streak : <%=habit.streak%>/7</span
+          >
+
+          <span class="badge bg-success rounded-pill mx-4">
+            Completed : <%=habit.completed%>/7</span
           >
         </div>
-        <span class="badge bg-success rounded-pill fs-5"
-          >Streak : <%=habit.streak%>/7</span
-        >
-        <span class="badge bg-success rounded-pill mx-4 fs-5">
-          Completed : <%=habit.completed%>/7</span
-        >
       </li>
       <%}%>
     </ol>
